@@ -1,12 +1,10 @@
 class Queue {
   List<dynamic> _elements = [];
 
-  // Add an element to the back of the queue
   void push(dynamic element) {
     _elements.add(element);
   }
 
-  // Remove and return the element at the front of the queue
   dynamic pop() {
     if (_elements.isEmpty) {
       throw 'Queue is empty';
@@ -30,7 +28,6 @@ class Queue {
     return _elements[_elements.length - 1];
   }
 
-  // Check if the queue is empty
   bool isEmpty() {
     return _elements.isEmpty;
   }
