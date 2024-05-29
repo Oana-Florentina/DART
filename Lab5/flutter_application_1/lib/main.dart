@@ -152,7 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         tooltip: 'Add Item',
         child: const Icon(Icons.add),
-      ),
+      ), floatingActionButtonFavorite: null,
     );
   }
 
