@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tazz_app/domain/category.dart';
+import 'package:tazz_app/domain/product.dart';
 
 class Restaurant {
   Restaurant({
@@ -10,7 +11,7 @@ class Restaurant {
 
   final String name;
   final Category category;
-  final Map<String, double> products;
+  final List<Product> products;
 
   bool isFavorite = false;
 }

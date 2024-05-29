@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:tazz_app/domain/restaurant.dart';
 import 'package:tazz_app/domain/category.dart';
+import 'package:tazz_app/domain/product.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -18,46 +19,47 @@ class _HomePageState extends State<HomePage> {
   String username = 'Florentina';
 
   final List<Restaurant> _restaurants = <Restaurant>[
-    Restaurant(name: 'KFC', category: Category.FastFood, products: {
-      'Chicken Bucket': 19.99,
-      'Chicken Sandwich': 5.99,
-      'Chicken Tenders': 7.99,
-    }),
-    Restaurant(name: 'Starbucks', category: Category.CoffeeShop, products: {
-      'Cappuccino': 3.99,
-      'Latte': 4.99,
-      'Mocha': 5.99,
-    }),
-    Restaurant(name: 'Pizza Hut', category: Category.PizzaPlace, products: {
-      'Pepperoni Pizza': 12.99,
-      'Cheese Pizza': 10.99,
-      'Veggie Pizza': 11.99,
-    }),
-    Restaurant(name: 'Chipotle', category: Category.MexicanFood, products: {
-      'Burrito': 7.99,
-      'Taco': 2.99,
-      'Bowl': 8.99,
-    }),
-    Restaurant(name: 'Partigiano', category: Category.PizzaPlace, products: {
-      'Margherita Pizza': 9.99,
-      'Quattro Stagioni Pizza': 12.99,
-      'Quattro Formaggi Pizza': 11.99,
-    }),
-    Restaurant(name: 'McDonalds', category: Category.FastFood, products: {
-      'Big Mac': 4.99,
-      'Cheeseburger': 1.99,
-      'McChicken': 3.99,
-    }),
-    Restaurant(name: 'Dunkin Donuts', category: Category.CoffeeShop, products: {
-      'Donut': 1.99,
-      'Coffee': 2.99,
-      'Muffin': 1.99,
-    }),
-    Restaurant(name: 'Taco Bell', category: Category.MexicanFood, products: {
-      'Quesadilla': 5.99,
-      'Nachos': 4.99,
-      'Chalupa': 3.99,
-    }),
+    Restaurant(name: 'KFC', category: Category.FastFood, products: [
+      Product(name: 'Chicken Wings', price: 5.99),
+      Product(name: 'Chicken Sandwich', price: 4.99),
+      Product(name: 'Fries', price: 2.99),
+    ]),
+    
+    Restaurant(name: 'Starbucks', category: Category.CoffeeShop, products: [
+      Product(name: 'Latte', price: 3.99),
+      Product(name: 'Cappuccino', price: 4.99),
+      Product(name: 'Mocha', price: 5.99),
+    ]),
+
+    Restaurant(name: 'Pizza Hut', category: Category.PizzaPlace, products: [
+      Product(name: 'Pepperoni Pizza', price: 9.99),
+      Product(name: 'Cheese Pizza', price: 8.99),
+      Product(name: 'Veggie Pizza', price: 10.99),
+    ]),
+    Restaurant(name: 'Chipotle', category: Category.MexicanFood, products: [
+      Product(name: 'Burrito', price: 7.99),
+      Product(name: 'Taco', price: 2.99),
+      Product(name: 'Bowl', price: 8.99),
+    ]),
+
+    Restaurant(name: 'McDonalds', category: Category.FastFood, products: [
+      Product(name: 'Big Mac', price: 4.99),
+      Product(name: 'McNuggets', price: 3.99),
+      Product(name: 'Fries', price: 2.99),
+    ]),
+
+    Restaurant(name: 'Dunkin Donuts', category: Category.CoffeeShop, products: [
+      Product(name: 'Donut', price: 1.99),
+      Product(name: 'Coffee', price: 2.99),
+      Product(name: 'Muffin', price: 3.99),
+    ]),
+
+    Restaurant(name: 'Papa Johns', category: Category.PizzaPlace, products: [
+      Product(name: 'Pepperoni Pizza', price: 9.99),
+      Product(name: 'Cheese Pizza', price: 8.99),
+      Product(name: 'Veggie Pizza', price: 10.99),
+    ]),
+    
   ];
 
   final TextEditingController _usernameController = TextEditingController();
