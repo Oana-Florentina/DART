@@ -105,56 +105,83 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
-  Widget buildFavoriteRestaurants() {
-    int favoriteCount = 0;
-    for (int i = 0; i < _restaurants.length; i++) {
-      if (_restaurants[i].isFavorite) {
-        favoriteCount++;
-      }
+ Widget buildFavoriteRestaurants() {
+  int favoriteCount = 0;
+  for (int i = 0; i < _restaurants.length; i++) {
+    if (_restaurants[i].isFavorite) {
+      favoriteCount++;
     }
-    return ListView.builder(
-      itemCount: favoriteCount,
-      itemBuilder: (BuildContext context, int index) {
-        int selectedIndex = 0;
-        Restaurant selectedRestaurant = _restaurants[0];
-        for (int i = 0, j = 0; i < _restaurants.length; i++) {
-          if (_restaurants[i].isFavorite) {
-            if (j == index) {
-              selectedIndex = i;
-              selectedRestaurant = _restaurants[i];
-              break;
-            }
-            j++;
+  }
+  return ListView.builder(
+    itemCount: favoriteCount,
+    itemBuilder: (BuildContext context, int index) {
+      int selectedIndex = 0;
+      Restaurant selectedRestaurant = _restaurants[0];
+      for (int i = 0, j = 0; i < _restaurants.length; i++) {
+        if (_restaurants[i].isFavorite) {
+          if (j == index) {
+            selectedIndex = i;
+            selectedRestaurant = _restaurants[i];
+            break;
           }
+          j++;
         }
-        return GestureDetector(
-          onTap: () {
-            // Navigate to the restaurant details page
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    ViewRestaurantPage(restaurant: _restaurants[selectedIndex]),
-              ),
-            );
-          },
-          child: Card(
-            child: ListTile(
-              title: Text(selectedRestaurant.name),
-              trailing: IconButton(
-                icon: Icon(Icons.delete, color: Colors.red),
-                onPressed: () {
-                  setState(() {
-                    _restaurants[selectedIndex].isFavorite = false;
-                  });
-                },
+      }
+      return GestureDetector(
+        onTap: () {
+          // Navigate to the restaurant details page
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  ViewRestaurantPage(restaurant: _restaurants[selectedIndex]),
+            ),
+          );
+        },
+        child: Card(
+          elevation: 4, // Add elevation for a shadow effect
+          margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16), // Add margin for spacing
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10), // Add rounded corners
+          ),
+          child: ListTile(
+            leading: ClipRRect(
+              borderRadius: BorderRadius.circular(10), // Add rounded corners to the image
+              child: Image.network(
+                selectedRestaurant.thumbnail, // Add the URL of the restaurant's image
+                height: 50, // Adjust height as needed
+                width: 50, // Adjust width as needed
+                fit: BoxFit.cover,
               ),
             ),
+            title: Text(
+              selectedRestaurant.name,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+            subtitle: Text(
+              selectedRestaurant.category.name, // Display restaurant category as subtitle
+              style: TextStyle(
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+            trailing: IconButton(
+              icon: Icon(Icons.delete, color: Colors.red),
+              onPressed: () {
+                setState(() {
+                  _restaurants[selectedIndex].isFavorite = false;
+                });
+              },
+            ),
           ),
-        );
-      },
-    );
-  }
+        ),
+      );
+    },
+  );
+}
+
 
   Widget buildProfilePage() {
     // Profile page
@@ -353,33 +380,40 @@ Widget buildHistory() {
 }
 
 
+Widget buildRestaurants() {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 4, // Maximum 4 items per line
+        crossAxisSpacing: 8.0,
+        mainAxisSpacing: 8.0,
+        childAspectRatio: 0.75,
+      ),
+      itemCount: _restaurants.length,
+      itemBuilder: (BuildContext context, int index) {
+        bool isFavorite = _restaurants[index].isFavorite;
 
-  Widget buildRestaurants() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4, // Maximum 4 items per line
-          crossAxisSpacing: 8.0,
-          mainAxisSpacing: 8.0,
-          childAspectRatio: 0.75,
-        ),
-        itemCount: _restaurants.length,
-        itemBuilder: (BuildContext context, int index) {
-          bool isFavorite = _restaurants[index].isFavorite;
-
-          return GestureDetector(
-            onTap: () {
-              // Navigate to the restaurant details page
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      ViewRestaurantPage(restaurant: _restaurants[index]),
-                ),
-              );
-            },
+        return GestureDetector(
+          onTap: () {
+            // Navigate to the restaurant details page
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    ViewRestaurantPage(restaurant: _restaurants[index]),
+              ),
+            );
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(_restaurants[index].thumbnail),
+                fit: BoxFit.cover,
+              ),
+            ),
             child: Card(
+              color: Colors.transparent, // Make card transparent
               child: Column(
                 children: [
                   Expanded(
@@ -388,16 +422,27 @@ Widget buildHistory() {
                       child: Text(
                         _restaurants[index].name,
                         textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0,
+                        ),
                       ),
                     ),
                   ),
                   ListTile(
-                    title:
-                        Text('Category: ${_restaurants[index].category.name}'),
+                    title: Text(
+                      'Category: ${_restaurants[index].category.name}',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                      ),
+                    ),
                     trailing: IconButton(
                       icon: Icon(
                         isFavorite ? Icons.favorite : Icons.favorite_border,
-                        color: isFavorite ? Colors.red : null,
+                        color: isFavorite ? Colors.red : Colors.white,
                       ),
                       onPressed: () {
                         setState(() {
@@ -409,11 +454,12 @@ Widget buildHistory() {
                 ],
               ),
             ),
-          );
-        },
-      ),
-    );
-  }
+          ),
+        );
+      },
+    ),
+  );
+}
 
  Widget buildHomePage() {
   return Padding(
@@ -424,11 +470,12 @@ Widget buildHistory() {
         Text(
           'Food & More',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 24,
             fontWeight: FontWeight.bold,
+            color: Colors.blue, // Change color to blue
           ),
         ),
-        SizedBox(height: 8),
+        SizedBox(height: 16),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -452,28 +499,35 @@ Widget buildHistory() {
             ),
           ],
         ),
-        SizedBox(height: 16),
+        SizedBox(height: 5), // Reduce spacing
         Text(
           'Today\'s Menu',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 24,
             fontWeight: FontWeight.bold,
+            color: Colors.green, // Change color to green
           ),
         ),
-        Expanded(child: buildTodaysMenu()),
-        SizedBox(height: 16),
+        SizedBox(height: 8), // Reduce spacing
+        Expanded(child: buildTodaysMenu()), // Utilize available space
+        SizedBox(height: 5), // Reduce spacing
         Text(
           'Favorite Restaurants',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 24,
             fontWeight: FontWeight.bold,
+            color: Colors.orange, // Change color to orange
           ),
         ),
-        Expanded(child: buildFavoriteRestaurants()),
+        SizedBox(height: 8), // Reduce spacing
+        Expanded(child: buildFavoriteRestaurants()), // Utilize available space
+        SizedBox(height: 5), // Reduce spacing
       ],
     ),
   );
 }
+
+
 Widget buildTodaysMenu() {
   List<Product> allMenuItems = [];
   List<Restaurant> allRestaurants = [..._restaurants]; // Copy all restaurants
@@ -540,34 +594,38 @@ Widget buildTodaysMenu() {
       ),
       SizedBox(height: 8),
       Center(
-        child:  ElevatedButton(
-        onPressed: () {
-          for (int i = 0; i < todaysMenuItems.length; i++) {
-            CartItem.addToCart(todaysMenuItems[i], todaysMenuRestaurants[i]);
-          }
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Today\'s menu added to cart')),
-          );
-        },
-        child: Text('Add Today\'s Menu to Cart'),
-      ),
+        child: ElevatedButton(
+          onPressed: () {
+            for (int i = 0; i < todaysMenuItems.length; i++) {
+              CartItem.addToCart(todaysMenuItems[i], todaysMenuRestaurants[i]);
+            }
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Today\'s menu added to cart')),
+            );
+          },
+          child: Text('Add Today\'s Menu to Cart'),
+        ),
       )
-     
     ],
   );
 }
 
 
-
 void navigateToRestaurantsByCategory(Category category) {
   List<Restaurant> restaurants = _restaurants.where((restaurant) => restaurant.category == category).toList();
+  List<String> miniThumbnailUrls = restaurants.map((restaurant) => restaurant.thumbnail).toList();
   Navigator.push(
     context,
     MaterialPageRoute(
-      builder: (context) => RestaurantsByCategoryPage(restaurants: restaurants, category: category.name),
+      builder: (context) => RestaurantsByCategoryPage(
+        restaurants: restaurants,
+        category: category.name,
+        miniThumbnailUrls: miniThumbnailUrls,
+      ),
     ),
   );
 }
+
 
 
 

@@ -24,7 +24,7 @@ class _ViewRestaurantPageState extends State<ViewRestaurantPage>
   }
 
   List<Product> filterProducts(FoodCategory category) {
-    if (category == "All") {
+    if (category == 'All') {
       return widget.restaurant.products;
     } else {
       return widget.restaurant.products
@@ -33,80 +33,110 @@ class _ViewRestaurantPageState extends State<ViewRestaurantPage>
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.restaurant.name),
-        bottom: TabBar(
-          controller: _tabController,
-          isScrollable: true,
-          tabs: const [
-            Tab(text: 'All'),
-            Tab(text: 'Coffee'),
-            Tab(text: 'Drinks'),
-            Tab(text: 'Food'),
-            Tab(text: 'Sweets'),
-          ],
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Category: ${widget.restaurant.category.name}',
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 16),
-              Image.network(
-                widget.restaurant.thumbnail, // Display the restaurant's image
-                height: 200, // Adjust height as needed
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-              SizedBox(height: 16),
-              const Text(
-                'Products:',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 8),
-              Container(
-                height: MediaQuery.of(context).size.height -
-                    300, // Adjust the height as needed
-                child: TabBarView(
+ @override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: Text(widget.restaurant.name),
+    ),
+    body: SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.network(
+            widget.restaurant.thumbnail, // Display the restaurant's image
+            height: 300, // Adjust height as needed
+            width: double.infinity,
+            fit: BoxFit.cover,
+          ),
+          SizedBox(height: 16),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  '${widget.restaurant.category.name}',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 16),
+                Text(
+                  '${widget.restaurant.details}',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.grey[700],
+                  ),
+                ),
+                SizedBox(height: 16),
+                TabBar(
                   controller: _tabController,
-                  children: [
-                    buildProductList(widget.restaurant.products),
-                    buildProductList(filterProducts(FoodCategory.Coffee)),
-                    buildProductList(filterProducts(FoodCategory.Drinks)),
-                    buildProductList(filterProducts(FoodCategory.Food)),
-                    buildProductList(filterProducts(FoodCategory.Sweets)),
+                  isScrollable: true,
+                  tabs: const [
+                    Tab(text: 'All'),
+                    Tab(text: 'Coffee'),
+                    Tab(text: 'Drinks'),
+                    Tab(text: 'Food'),
+                    Tab(text: 'Sweets'),
                   ],
                 ),
-              ),
-            ],
+                SizedBox(height: 16),
+                const Text(
+                  'Products:',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 8),
+                Container(
+                  height: MediaQuery.of(context).size.height -
+                      500, // Adjust the height as needed
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: [
+                      buildProductList(widget.restaurant.products),
+                      buildProductList(filterProducts(FoodCategory.Coffee)),
+                      buildProductList(filterProducts(FoodCategory.Drinks)),
+                      buildProductList(filterProducts(FoodCategory.Food)),
+                      buildProductList(filterProducts(FoodCategory.Sweets)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
+        ],
       ),
-    );
-  }
-
-  Widget buildProductList(List<Product> products) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      itemCount: products.length,
-      itemBuilder: (context, index) {
-        final Product product = products[index];
-        return ListTile(
+    ),
+  );
+}
+Widget buildProductList(List<Product> products) {
+  return ListView.builder(
+    shrinkWrap: true,
+    physics: NeverScrollableScrollPhysics(),
+    itemCount: products.length,
+    itemBuilder: (context, index) {
+      final Product product = products[index];
+      return Card(
+        elevation: 3,
+        margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: ListTile(
+          contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(product.name),
+              Text(
+                product.name,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               IconButton(
                 icon: Icon(Icons.add_shopping_cart),
                 onPressed: () {
@@ -119,12 +149,18 @@ class _ViewRestaurantPageState extends State<ViewRestaurantPage>
               ),
             ],
           ),
-          trailing: Text('\$${product.price.toStringAsFixed(2)}'),
-        );
-      },
-    );
-  }
+         
+          trailing: Text(
+            '\$${product.price.toStringAsFixed(2)}',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
+      );
+    },
+  );
 }
+    }
+
 
 class CartItem {
   final Product product;
