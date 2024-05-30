@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
       Product(name: 'Soda', price: 1.99, category: FoodCategory.Drinks),
       Product(name: 'ice cream', price: 1.99, category: FoodCategory.Sweets),
       Product(name: 'Cappuccino', price: 4.99, category: FoodCategory.Coffee),
-    ], details: 'KFC is a fast food restaurant chain that specializes in fried chicken.', thumbnail: 'https://media.istockphoto.com/id/1350382805/ro/fotografie/farfurie-crocant%C4%83-de-pui-pr%C4%83jit%C4%83-delicios-de-pui-pr%C4%83jit-crocant-de-cas%C4%83-crocante-pui.jpg?s=2048x2048&w=is&k=20&c=pUNEsSs8CF1VC5ReppjNFuEKjqdPfvE3PeE9QILScF4='),
+    ], details: 'KFC is a fast food restaurant chain that specializes in fried chicken.', thumbnail: 'https://cdn.pixabay.com/photo/2020/03/16/19/43/chicken-4938114_1280.jpg'),
     Restaurant(name: 'Starbucks', category: Category.CoffeeShop, products: [
       Product(name: 'Latte', price: 3.99, category: FoodCategory.Coffee),
       Product(name: 'Cappuccino', price: 4.99, category: FoodCategory.Coffee),

@@ -6,13 +6,15 @@ import 'package:tazz_app/domain/category.dart';
 class ViewRestaurantPage extends StatefulWidget {
   final Restaurant restaurant;
 
-  const ViewRestaurantPage({Key? key, required this.restaurant}) : super(key: key);
+  const ViewRestaurantPage({Key? key, required this.restaurant})
+      : super(key: key);
 
   @override
   _ViewRestaurantPageState createState() => _ViewRestaurantPageState();
 }
 
-class _ViewRestaurantPageState extends State<ViewRestaurantPage> with SingleTickerProviderStateMixin {
+class _ViewRestaurantPageState extends State<ViewRestaurantPage>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -22,10 +24,12 @@ class _ViewRestaurantPageState extends State<ViewRestaurantPage> with SingleTick
   }
 
   List<Product> filterProducts(FoodCategory category) {
-    if (category == 'All') {
+    if (category == "All") {
       return widget.restaurant.products;
     } else {
-      return widget.restaurant.products.where((product) => product.category == category).toList();
+      return widget.restaurant.products
+          .where((product) => product.category == category)
+          .toList();
     }
   }
 
@@ -46,34 +50,46 @@ class _ViewRestaurantPageState extends State<ViewRestaurantPage> with SingleTick
           ],
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Category: ${widget.restaurant.category.name}',
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 16),
-            const Text(
-              'Products:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 8),
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: [
-                  buildProductList(widget.restaurant.products),
-                  buildProductList(filterProducts(FoodCategory.Coffee)),
-                  buildProductList(filterProducts(FoodCategory.Drinks)),
-                  buildProductList(filterProducts(FoodCategory.Food)),
-                  buildProductList(filterProducts(FoodCategory.Sweets)),
-                ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Category: ${widget.restaurant.category.name}',
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-            ),
-          ],
+              SizedBox(height: 16),
+              Image.network(
+                widget.restaurant.thumbnail, // Display the restaurant's image
+                height: 200, // Adjust height as needed
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+              SizedBox(height: 16),
+              const Text(
+                'Products:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 8),
+              Container(
+                height: MediaQuery.of(context).size.height -
+                    300, // Adjust the height as needed
+                child: TabBarView(
+                  controller: _tabController,
+                  children: [
+                    buildProductList(widget.restaurant.products),
+                    buildProductList(filterProducts(FoodCategory.Coffee)),
+                    buildProductList(filterProducts(FoodCategory.Drinks)),
+                    buildProductList(filterProducts(FoodCategory.Food)),
+                    buildProductList(filterProducts(FoodCategory.Sweets)),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -81,6 +97,8 @@ class _ViewRestaurantPageState extends State<ViewRestaurantPage> with SingleTick
 
   Widget buildProductList(List<Product> products) {
     return ListView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       itemCount: products.length,
       itemBuilder: (context, index) {
         final Product product = products[index];
@@ -113,7 +131,8 @@ class CartItem {
   final Restaurant restaurant;
   int quantity;
 
-  CartItem({required this.product, required this.restaurant, this.quantity = 1});
+  CartItem(
+      {required this.product, required this.restaurant, this.quantity = 1});
 
   static List<CartItem> cartItems = [];
 
@@ -143,5 +162,3 @@ class CartItem {
     return cartItems;
   }
 }
-
-
