@@ -25,40 +25,60 @@ class _HomePageState extends State<HomePage> {
 
   final List<Restaurant> _restaurants = <Restaurant>[
     Restaurant(name: 'KFC', category: Category.FastFood, products: [
-      Product(name: 'Chicken Wings', price: 5.99),
-      Product(name: 'Chicken Sandwich', price: 4.99),
-      Product(name: 'Fries', price: 2.99),
-    ]),
+      Product(name: 'Chicken Wings', price: 5.99, category: FoodCategory.Food),
+      Product(name: 'Chicken Sandwich', price: 4.99, category: FoodCategory.Food),
+      Product(name: 'Fries', price: 2.99, category: FoodCategory.Food),
+      Product(name: 'Water', price: 1.99, category: FoodCategory.Drinks),
+      Product(name: 'Soda', price: 1.99, category: FoodCategory.Drinks),
+      Product(name: 'ice cream', price: 1.99, category: FoodCategory.Sweets),
+      Product(name: 'Cappuccino', price: 4.99, category: FoodCategory.Coffee),
+    ], details: 'KFC is a fast food restaurant chain that specializes in fried chicken.', thumbnail: 'https://media.istockphoto.com/id/1350382805/ro/fotografie/farfurie-crocant%C4%83-de-pui-pr%C4%83jit%C4%83-delicios-de-pui-pr%C4%83jit-crocant-de-cas%C4%83-crocante-pui.jpg?s=2048x2048&w=is&k=20&c=pUNEsSs8CF1VC5ReppjNFuEKjqdPfvE3PeE9QILScF4='),
     Restaurant(name: 'Starbucks', category: Category.CoffeeShop, products: [
-      Product(name: 'Latte', price: 3.99),
-      Product(name: 'Cappuccino', price: 4.99),
-      Product(name: 'Mocha', price: 5.99),
-    ]),
+      Product(name: 'Latte', price: 3.99, category: FoodCategory.Coffee),
+      Product(name: 'Cappuccino', price: 4.99, category: FoodCategory.Coffee),
+      Product(name: 'Mocha', price: 5.99, category: FoodCategory.Coffee),
+      Product(name: 'Donut', price: 1.99, category: FoodCategory.Sweets),
+      Product(name: 'Muffin', price: 2.99, category: FoodCategory.Sweets),
+      Product(name: 'Sandwich', price: 6.99, category: FoodCategory.Food),
+      Product(name: 'Water', price: 1.99, category: FoodCategory.Drinks),
+    ], details: 'Starbucks is a coffee shop chain that offers a variety of coffee drinks and snacks.', thumbnail: 'https://cdn.pixabay.com/photo/2015/04/02/04/12/starbucks-703314_1280.jpg'),
     Restaurant(name: 'Pizza Hut', category: Category.PizzaPlace, products: [
-      Product(name: 'Pepperoni Pizza', price: 9.99),
-      Product(name: 'Cheese Pizza', price: 8.99),
-      Product(name: 'Veggie Pizza', price: 10.99),
-    ]),
+      Product(name: 'Pepperoni Pizza', price: 9.99, category: FoodCategory.Food),
+      Product(name: 'Cheese Pizza', price: 8.99, category: FoodCategory.Food),
+      Product(name: 'Veggie Pizza', price: 10.99, category: FoodCategory.Food),
+      Product(name: 'Sandwich', price: 6.99, category: FoodCategory.Food),
+      Product(name: 'Water', price: 1.99, category: FoodCategory.Drinks),
+      Product(name: 'Cappuccino', price: 4.99, category: FoodCategory.Coffee),
+    ], details: 'Pizza Hut is a pizza restaurant chain that offers a variety of pizzas and other food items.', thumbnail: 'https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395_960_720.jpg'),
     Restaurant(name: 'Chipotle', category: Category.MexicanFood, products: [
-      Product(name: 'Burrito', price: 7.99),
-      Product(name: 'Taco', price: 2.99),
-      Product(name: 'Bowl', price: 8.99),
-    ]),
+      Product(name: 'Burrito', price: 7.99, category: FoodCategory.Food),
+      Product(name: 'Taco', price: 2.99, category: FoodCategory.Food),
+      Product(name: 'Bowl', price: 8.99, category: FoodCategory.Food),
+      Product(name: 'Cappuccino', price: 4.99, category: FoodCategory.Coffee),
+      Product(name: 'Water', price: 1.99, category: FoodCategory.Drinks),
+    ], details: 'Chipotle is a Mexican food restaurant chain that offers burritos, tacos, and bowls.', thumbnail: 'https://cdn.pixabay.com/photo/2022/05/23/20/47/burrito-7217208_1280.jpg'),
     Restaurant(name: 'McDonalds', category: Category.FastFood, products: [
-      Product(name: 'Big Mac', price: 4.99),
-      Product(name: 'McNuggets', price: 3.99),
-      Product(name: 'Fries', price: 2.99),
-    ]),
+      Product(name: 'Big Mac', price: 4.99, category: FoodCategory.Food),
+      Product(name: 'McNuggets', price: 3.99, category: FoodCategory.Food),
+      Product(name: 'Water', price: 1.99, category: FoodCategory.Drinks),
+      Product(name: 'Fries', price: 2.99, category: FoodCategory.Food),
+      Product(name: 'Cappuccino', price: 4.99, category: FoodCategory.Coffee),
+    ], details: 'McDonalds is a fast food restaurant chain that offers burgers, fries, and other food items.', thumbnail: 'https://cdn.pixabay.com/photo/2017/08/12/18/59/snack-2635035_1280.jpg'),
     Restaurant(name: 'Dunkin Donuts', category: Category.CoffeeShop, products: [
-      Product(name: 'Donut', price: 1.99),
-      Product(name: 'Coffee', price: 2.99),
-      Product(name: 'Muffin', price: 3.99),
-    ]),
+      Product(name: 'Donut', price: 1.99, category: FoodCategory.Sweets),
+      Product(name: 'Coffee', price: 2.99, category: FoodCategory.Coffee),
+      Product(name: 'Muffin', price: 3.99, category: FoodCategory.Sweets),
+      Product(name: 'Sandwich', price: 6.99, category: FoodCategory.Food),
+      Product(name: 'Water', price: 1.99, category: FoodCategory.Drinks),
+      Product(name: 'Cappuccino', price: 4.99, category: FoodCategory.Coffee),
+    ], details: 'Dunkin Donuts is a coffee shop chain that offers a variety of coffee drinks and donuts.', thumbnail: 'https://cdn.pixabay.com/photo/2019/01/28/14/07/donut-3960489_1280.jpg'),
     Restaurant(name: 'Papa Johns', category: Category.PizzaPlace, products: [
-      Product(name: 'Pepperoni Pizza', price: 9.99),
-      Product(name: 'Cheese Pizza', price: 8.99),
-      Product(name: 'Veggie Pizza', price: 10.99),
-    ]),
+      Product(name: 'Pepperoni Pizza', price: 9.99, category: FoodCategory.Food),
+      Product(name: 'Cheese Pizza', price: 8.99, category: FoodCategory.Food),
+      Product(name: 'Veggie Pizza', price: 10.99, category: FoodCategory.Food),
+      Product(name: 'Water', price: 1.99, category: FoodCategory.Drinks),
+      Product(name: 'Cappuccino', price: 4.99, category: FoodCategory.Coffee),
+    ], details: 'Papa Johns is a pizza restaurant chain that offers a variety of pizzas and other food items.', thumbnail: 'https://cdn.pixabay.com/photo/2020/06/08/16/49/pizza-5275191_1280.jpg'),
   ];
 
   final TextEditingController _usernameController = TextEditingController();
@@ -243,44 +263,70 @@ void updateCart() {
 
 
 Widget buildCart() {
-    List<CartItem> cartItems = CartItem.getCartItems();
-    return Column(
-      children: [
-        Expanded(
-          child: ListView.builder(
-            itemCount: cartItems.length,
-            itemBuilder: (BuildContext context, int index) {
-              final CartItem cartItem = cartItems[index];
-              return ListTile(
-                title: Text('${cartItem.product.name} (${cartItem.restaurant.name})'),
+  List<CartItem> cartItems = CartItem.getCartItems();
+  double totalPrice = cartItems.fold(0, (sum, item) => sum + item.product.price * item.quantity);
+
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Expanded(
+        child: ListView.builder(
+          itemCount: cartItems.length,
+          itemBuilder: (BuildContext context, int index) {
+            final CartItem cartItem = cartItems[index];
+            return Card(
+              margin: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+              child: ListTile(
+                contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                title: Text(
+                  '${cartItem.product.name} (${cartItem.restaurant.name})',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 subtitle: Text('Quantity: ${cartItem.quantity}'),
-                trailing: Text('\$${(cartItem.product.price * cartItem.quantity).toStringAsFixed(2)}'),
+                trailing: Text(
+                  '\$${(cartItem.product.price * cartItem.quantity).toStringAsFixed(2)}',
+                  style: TextStyle(color: Colors.green),
+                ),
                 onTap: () => showProductDialog(cartItem),
-              );
-            },
-          ),
-        ),
-        ElevatedButton(
-          
-          onPressed: () {
-            if (cartItems.isNotEmpty) {
-              receipts.add(List.from(cartItems));
-              CartItem.clearCart();
-              updateCart();
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Payment successful, cart cleared')),
-              );
-            } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Cart is empty')),
-              );
-            }
+              ),
+            );
           },
-          child: Text('Pay'),
         ),
-      ],
-    );
-  }
+      ),
+      Divider(height: 1, color: Colors.grey),
+      Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Total: \$${totalPrice.toStringAsFixed(2)}',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (cartItems.isNotEmpty) {
+                  receipts.add(List.from(cartItems));
+                  CartItem.clearCart();
+                  updateCart();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Payment successful, cart cleared')),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Cart is empty')),
+                  );
+                }
+              },
+              child: Text('Pay'),
+            ),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
 
 Widget buildHistory() {
   return ListView.builder(
