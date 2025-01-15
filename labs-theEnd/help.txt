@@ -1,0 +1,40 @@
+
+deschid pgadmin
+
+    T1
+merg in ~/Desktop/Java/payara/payara6/bin
+./asadmin start-domain
+
+    T2
+merg in cd ~/Desktop/Java/Lab3-4-5
+sudo docker compose up
+mvn clean install
+
+    T1
+ ./asadmin undeploy Lab3-1.0 (Daca am)
+./asadmin deploy  /home/florentina/Desktop/Java/labs-theEnd/target/labs-theEnd-1.0.war
+
+
+la final:
+sudo docker compose down
+./asadmin stop-domain
+
+
+utils: 
+./asadmin list-applications
+
+CREATE TABLE client (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    phone VARCHAR(20),
+    date_of_birth DATE,
+    gender VARCHAR(10)
+);
+CREATE TABLE products (
+                          id SERIAL PRIMARY KEY,
+                          name VARCHAR(100) NOT NULL,
+                          description TEXT,
+                          quantity INT NOT NULL,
+                          price DECIMAL(10, 2) NOT NULL
+);
